@@ -2,18 +2,33 @@ import { mongoose } from "mongoose";
 
 const { Schema } = mongoose;
 
-const entrySchema = new Schema(
+const eventSchema = new Schema(
   {
     date: {
       type: Date,
       required: true,
     },
-    type: {
+    title: {
       type: String,
-      enum: ["work", "learning", "interesting-thing"],
       required: true,
     },
-    text: {
+    descripton: {
+      type: String,
+      required: true,
+    },
+    attending: {
+      type: Array,
+      required: false,
+    },
+    place: {
+      type: String,
+      required: true,
+    },
+    startTime: {
+      type: String,
+      required: true,
+    },
+    endTime: {
       type: String,
       required: true,
     },
@@ -28,8 +43,8 @@ const entrySchema = new Schema(
 // in the database (which will be created automatically).
 export const models = [
   {
-    name: "Entry",
-    schema: entrySchema,
-    collection: "entries",
+    name: "Events",
+    schema: eventSchema,
+    collection: "events",
   },
 ];
