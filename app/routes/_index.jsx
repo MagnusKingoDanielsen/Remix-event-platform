@@ -3,7 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import mongoose from "mongoose";
 
 export async function loader() {
-  const entries = await mongoose.models.Entry.find({});
+  const entries = await mongoose.models.Events.find({});
   return json({ entries });
 }
 
