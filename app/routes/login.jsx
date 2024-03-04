@@ -1,5 +1,7 @@
 import { Form, redirect, useActionData } from "@remix-run/react";
 import { commitSession, getSession } from "../services/session.server.jsx";
+import mongoose from "mongoose";
+import { login } from "~/services/encryption.jsx";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -32,13 +34,12 @@ export async function action({ request }) {
   const formData = await request.formData();
   const { email, password } = Object.fromEntries(formData);
 
-  if (email === "test@test.dk" && password === "test") {
-    const session = await getSession();
-    session.set("user", true);
-    return redirect("/", {
-      headers: { "Set-Cookie": await commitSession(session) },
-    });
-  } else {
+  if (!(await login(email, password))) {
     return "error", "Invalid email or password";
   }
+  const session = await getSession();
+  session.set("user", true);
+  return redirect("/", {
+    headers: { "Set-Cookie": await commitSession(session) },
+  });
 }
