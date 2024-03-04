@@ -1,7 +1,6 @@
 import { Form, redirect, useActionData } from "@remix-run/react";
 import { commitSession, getSession } from "../services/session.server.jsx";
-import mongoose from "mongoose";
-import { login } from "~/services/encryption.jsx";
+import { login } from "~/services/encryption.server.jsx";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
