@@ -42,12 +42,14 @@ export default function LoginPage() {
 export async function action({ request }) {
   const formData = await request.formData();
   const { email, password } = Object.fromEntries(formData);
-
-  if (!(await login(email, password))) {
+  const { result, username } = await login(email, password);
+  if (!result) {
     return "error", "Invalid email or password";
   }
+
   const session = await getSession();
   session.set("user", true);
+  session.set("username", username);
   return redirect("/", {
     headers: { "Set-Cookie": await commitSession(session) },
   });
