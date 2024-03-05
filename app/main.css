@@ -184,7 +184,7 @@ nav a {
   background-color: var(--text-color);
 }
 
-.gatheringsForm fieldset {
+.fieldset {
   border: none;
   width: 400px;
   display: flex;
@@ -192,8 +192,12 @@ nav a {
   align-items: center;
   color: var(--grey-text-color);
 }
+.fieldset h1 {
+  color: var(--background-color);
+  font-size: 20px;
+}
 
-.gatheringsForm input,
+.fieldset input,
 textarea {
   width: 380px;
   padding: 10px;
@@ -205,7 +209,7 @@ textarea {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.gatheringsForm input:focus {
+.fieldset input:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -226,7 +230,14 @@ textarea {
   width: fit-content;
 }
 
-.gatheringsForm button {
+.fieldset img {
+  width: fit-content;
+  height: auto;
+  max-width: 400px;
+  max-height: 300px;
+}
+
+.fieldset button {
   width: 400px;
   padding: 10px;
   margin: 10px 0;
@@ -239,12 +250,12 @@ textarea {
   transition: 0.3s;
 }
 
-.gatheringsForm button:active,
-.gatheringsForm input::file-selector-button:active {
+.fieldset button:active,
+.fieldset input::file-selector-button:active {
   transform: scale(0.95);
 }
 
-.gatheringsForm input::file-selector-button {
+.fieldset input::file-selector-button {
   background-color: var(--background-color);
   color: var(--text-color);
   border: none;

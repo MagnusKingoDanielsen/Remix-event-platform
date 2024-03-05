@@ -47,7 +47,7 @@ export default function gatheringsForm({ post = {} }) {
           <h1>Edit gathering</h1>
         )}
 
-        <div className="title">
+        <div>
           <label htmlFor="title">Title</label>
           <input
             type="text"
@@ -92,7 +92,7 @@ export default function gatheringsForm({ post = {} }) {
             />
           </div>
         </div>
-        <div className="place">
+        <div>
           <label htmlFor="place">Place</label>
           <input
             type="text"
@@ -103,19 +103,17 @@ export default function gatheringsForm({ post = {} }) {
             defaultValue={post?.place}
           />
         </div>
-        <div className="">
-          <label className="" htmlFor="file_input">
-            Add an image
-          </label>
-          <input
-            className=""
-            name="image"
-            type="file"
-            onChange={handleImageChange}
-          />
-          {image && <img src={image} alt="" className="" width={400} />}
+        <div>
+          <label htmlFor="file_input">Add an image</label>
+          <input name="image" type="file" onChange={handleImageChange} />
+          {image && (
+            <img
+              src={image}
+              alt="Image that (hopefully) fits with the gathering"
+            />
+          )}
         </div>
-        <div className="description">
+        <div>
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
