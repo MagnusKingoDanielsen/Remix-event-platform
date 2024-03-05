@@ -1,4 +1,4 @@
-import { useLoaderData, Link } from "@remix-run/react";
+import { redirect } from "@remix-run/react";
 import mongoose from "mongoose";
 import { getSession } from "../services/session.server.jsx";
 import GatheringsForm from "../components/gatheringsForm.jsx";
