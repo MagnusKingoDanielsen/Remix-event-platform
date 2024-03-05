@@ -6,7 +6,9 @@ import { uploadImage } from "../upload-handler.server.js";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
-  console.log(session.data);
+  if (!session.data.user) {
+    return redirect("/login");
+  }
 
   return { session: session.data };
 }
