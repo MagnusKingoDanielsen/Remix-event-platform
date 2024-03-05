@@ -13,10 +13,9 @@ export async function loader({ request }) {
 
 export default function Projekter() {
   return (
-    <>
-      <h1>Create gathering</h1>
+    <div className="createGathering">
       <GatheringsForm />
-    </>
+    </div>
   );
 }
 

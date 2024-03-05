@@ -1,4 +1,4 @@
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 
 export default function gatheringsForm({ post = {} }) {
@@ -10,6 +10,7 @@ export default function gatheringsForm({ post = {} }) {
   const dateValue = post.date
     ? new Date(post.date).toISOString().split("T")[0]
     : "";
+  const page = useLocation().pathname;
 
   function handleImageChange(event) {
     const file = event.target.files[0];
@@ -36,11 +37,18 @@ export default function gatheringsForm({ post = {} }) {
   return (
     <fetcher.Form
       method="post"
-      className="AddForm"
+      className="gatheringsForm"
       encType="multipart/form-data"
     >
       <fieldset disabled={fetcher.state !== "idle"} className="fieldset">
+        {page === "/createGatherings" ? (
+          <h1>Create gathering</h1>
+        ) : (
+          <h1>Edit gathering</h1>
+        )}
+
         <div className="title">
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             id="title"
@@ -51,8 +59,9 @@ export default function gatheringsForm({ post = {} }) {
           />
         </div>
         <div className="dateAndTime">
-          <div className="datePicker">
+          <div>
             {/* Date picker */}
+            <label htmlFor="date">Date</label>
             <input
               type="date"
               id="date"
@@ -61,8 +70,9 @@ export default function gatheringsForm({ post = {} }) {
               defaultValue={dateValue}
             />
           </div>
-          <div className="timePicker">
-            {/* Time picker */}
+          {/* Time picker */}
+          <div>
+            <label htmlFor="startTime">Start time</label>
             <input
               type="time"
               id="startTime"
@@ -70,6 +80,9 @@ export default function gatheringsForm({ post = {} }) {
               required
               defaultValue={post?.startTime}
             />
+          </div>
+          <div>
+            <label htmlFor="endTime">End time</label>
             <input
               type="time"
               id="endTime"
@@ -80,18 +93,19 @@ export default function gatheringsForm({ post = {} }) {
           </div>
         </div>
         <div className="place">
+          <label htmlFor="place">Place</label>
           <input
             type="text"
             id="place"
             name="place"
-            placeholder="Place"
+            placeholder="Where is the event taking place?"
             required
             defaultValue={post?.place}
           />
         </div>
         <div className="">
           <label className="" htmlFor="file_input">
-            Image
+            Add an image
           </label>
           <input
             className=""
@@ -102,6 +116,7 @@ export default function gatheringsForm({ post = {} }) {
           {image && <img src={image} alt="" className="" width={400} />}
         </div>
         <div className="description">
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
             name="description"
