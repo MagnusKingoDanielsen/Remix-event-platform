@@ -13,9 +13,9 @@ export default function Nav() {
               <p>placeholder</p>
             </div>
             <div className="mainLinks">
-              <a href="/Gatherings">Gatherings</a>
-              <a href="/CreateGatherings">Create a gathering</a>
-              <a href="/MyGatherings">My gatherings</a>
+              <a href="/gatherings">Gatherings</a>
+              <a href="/createGatherings">Create a gathering</a>
+              <a href="/myGatherings">My gatherings</a>
             </div>
             {session.user ? (
               <Form method="post">
