@@ -1,4 +1,98 @@
-:root{
-    --background-color:rgb(15 23 42);
-    --text-color:rgb(248 250 252);
+:root {
+  --background-color: rgb(15 23 42);
+  --text-color: rgb(248 250 252);
+  --grey-text-color: rgb(150 150 150);
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+/* Styling of login and sign up page */
+.loginPage,
+.signupPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+/* Styling of login and sign up container */
+.loginContainer,
+.signupContainer {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--text-color);
+}
+/* Styling of login and sign up form */
+.loginContainer form,
+.signupContainer form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Styling of login and sign up form heading and paragraph */
+.loginContainer h1,
+.signupContainer h1 {
+  margin-bottom: 20px;
+  color: var(--background-color);
+  text-align: center;
+}
+
+.loginContainer p,
+.signupContainer p {
+  margin-bottom: 20px;
+  color: var(--grey-text-color);
+  text-align: center;
+}
+/* Styling of login and sign up form input and button */
+.loginContainer input,
+.loginContainer button,
+.signupContainer input,
+.signupContainer button {
+  width: 330px;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Styling of login and sign up form input and button on focus and hover */
+.loginContainer input:focus,
+.signupContainer input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.loginContainer button,
+.signupContainer button {
+  width: 350px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.loginContainer button:hover,
+.signupContainer button:hover {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.loginContainer button:active,
+.signupContainer button:active {
+  transform: scale(0.95);
+}
+/* Styling of login and sign up form paragraph */
+.loginContainer p a,
+.signupContainer p a {
+  color: var(--background-color);
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bolder;
 }
