@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  background-color: var(--background-color);
   color: var(--text-color);
 }
 /* Styling of login and sign up page */
@@ -95,4 +94,46 @@ body {
   text-decoration: none;
   transition: 0.3s;
   font-weight: bolder;
+}
+
+/* styling of Nav */
+nav {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Stick to the top */
+  z-index: 1; /* Stay on top of everything */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 10px 5%;
+}
+
+.mainLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+
+.logoutBTN {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 20px;
 }
