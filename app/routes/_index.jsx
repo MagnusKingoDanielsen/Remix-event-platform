@@ -13,17 +13,7 @@ export async function loader({ request }) {
 export default function Index() {
   const { entries, session } = useLoaderData();
 
-  return (
-    <div className="">
-      {session.user ? (
-        <Form method="post">
-          <button className="logoutBTN">Logout</button>
-        </Form>
-      ) : (
-        <Link to="/login">Login</Link>
-      )}
-    </div>
-  );
+  return;
 }
 
 export async function action({ request }) {
