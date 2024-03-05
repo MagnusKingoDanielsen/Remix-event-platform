@@ -13,18 +13,28 @@ export async function loader({ request }) {
 export default function LoginPage() {
   const error = useActionData();
   return (
-    <div className="loginContainer">
-      <Form method="post">
-        <input placeholder="email" name="email" type="email" required />
-        <input
-          placeholder="password"
-          name="password"
-          type="password"
-          required
-        />
-        {error && <p>{error}</p>}
-        <button>Log in</button>
-      </Form>
+    <div className="loginPage">
+      <div className="loginContainer">
+        <Form method="post" className="loginForm">
+          <h1>Login</h1>
+          <input placeholder="email" name="email" type="email" required />
+          <input
+            placeholder="password"
+            name="password"
+            type="password"
+            required
+          />
+          {error && <p>{error}</p>}
+          <button>Log in</button>
+          <p className="goToSignup">
+            Dont have an acount?
+            <a href="/signup" className="signupLink">
+              {" "}
+              Sign up
+            </a>
+          </p>
+        </Form>
+      </div>
     </div>
   );
 }
