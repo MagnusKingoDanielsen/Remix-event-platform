@@ -1,4 +1,4 @@
-import { useLoaderData, Link } from "@remix-run/react";
+import { redirect } from "@remix-run/react";
 import mongoose from "mongoose";
 import { getSession } from "../services/session.server.jsx";
 import GatheringsForm from "../components/gatheringsForm.jsx";
@@ -6,7 +6,9 @@ import { uploadImage } from "../upload-handler.server.js";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
-  console.log(session.data);
+  if (!session.data.user) {
+    return redirect("/login");
+  }
 
   return { session: session.data };
 }
