@@ -44,7 +44,7 @@ export async function action({ request }) {
   const { email, password } = Object.fromEntries(formData);
   const { result, username } = await login(email, password);
   if (!result) {
-    return "error", "Invalid email or password";
+    return "Invalid email or password";
   }
 
   const session = await getSession();
