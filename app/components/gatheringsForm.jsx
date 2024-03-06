@@ -1,8 +1,20 @@
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import attendingImg from "../img/attending.png";
+import placeholderImg from "../img/placeholder.jpg";
 
 export default function gatheringsForm({ post = {} }) {
-  const [image, setImage] = useState(post?.imageUrl ? post?.imageUrl : null);
+  const [image, setImage] = useState(
+    post?.imageUrl ? post?.imageUrl : placeholderImg,
+  );
+
+  const [title, setTitle] = useState("Placeholder title");
+  const [date, setDate] = useState("00 000 0000");
+  const [description, setDescription] = useState("Placeholder description");
+  const [place, setPlace] = useState("Placeholder place");
+  const [startTime, setStartTime] = useState("00:00");
+  const [endTime, setEndTime] = useState("00:00");
+
   const fetcher = useFetcher();
   const descriptionareaRef = useRef(null);
   const isIdle = fetcher.state === "idle";
@@ -35,99 +47,149 @@ export default function gatheringsForm({ post = {} }) {
   }, [isInit, isIdle]);
 
   return (
-    <fetcher.Form
-      method="post"
-      className="gatheringsForm"
-      encType="multipart/form-data"
-    >
-      <fieldset disabled={fetcher.state !== "idle"} className="fieldset">
-        {page === "/createGatherings" ? (
-          <h1>Create gathering</h1>
-        ) : (
-          <h1>Edit gathering</h1>
-        )}
-
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Gathering title"
-            required
-            defaultValue={post?.title}
-          />
-        </div>
-        <div className="dateAndTime">
-          <div>
-            {/* Date picker */}
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              required
-              defaultValue={dateValue}
-            />
-          </div>
-          {/* Time picker */}
-          <div>
-            <label htmlFor="startTime">Start time</label>
-            <input
-              type="time"
-              id="startTime"
-              name="startTime"
-              required
-              defaultValue={post?.startTime}
-            />
-          </div>
-          <div>
-            <label htmlFor="endTime">End time</label>
-            <input
-              type="time"
-              id="endTime"
-              name="endTime"
-              required
-              defaultValue={post?.endTime}
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="place">Place</label>
-          <input
-            type="text"
-            id="place"
-            name="place"
-            placeholder="Where is the event taking place?"
-            required
-            defaultValue={post?.place}
-          />
-        </div>
-        <div>
-          <label htmlFor="file_input">Add an image</label>
-          <input name="image" type="file" onChange={handleImageChange} />
-          {image && (
-            <img
-              src={image}
-              alt="Image that (hopefully) fits with the gathering"
-            />
+    <>
+      <fetcher.Form
+        method="post"
+        className="gatheringsForm"
+        encType="multipart/form-data"
+      >
+        <fieldset disabled={fetcher.state !== "idle"} className="fieldset">
+          {page === "/createGatherings" ? (
+            <h1>Create gathering</h1>
+          ) : (
+            <h1>Edit gathering</h1>
           )}
+
+          <div>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Gathering title"
+              required
+              defaultValue={post?.title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="dateAndTime">
+            <div>
+              {/* Date picker */}
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                required
+                defaultValue={dateValue}
+                onChange={(e) =>
+                  setDate(
+                    new Date(e.target.value).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    }),
+                  )
+                }
+              />
+            </div>
+            {/* Time picker */}
+            <div>
+              <label htmlFor="startTime">Start time</label>
+              <input
+                type="time"
+                id="startTime"
+                name="startTime"
+                required
+                defaultValue={post?.startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="endTime">End time</label>
+              <input
+                type="time"
+                id="endTime"
+                name="endTime"
+                required
+                defaultValue={post?.endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="place">Place</label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              placeholder="Where is the event taking place?"
+              required
+              defaultValue={post?.place}
+              onChange={(e) => setPlace(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="file_input">Add an image</label>
+            <input name="image" type="file" onChange={handleImageChange} />
+            {image && (
+              <img
+                src={image}
+                alt="Image that (hopefully) fits with the gathering"
+              />
+            )}
+          </div>
+          <div>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              ref={descriptionareaRef}
+              placeholder="Whats the gathering for/about?"
+              defaultValue={post?.description}
+              required
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <button type="submit" disabled={fetcher.state === "submitting"}>
+            {fetcher.state !== "idle" ? "Saving..." : "Save"}
+          </button>
+        </fieldset>
+      </fetcher.Form>
+      {page === "/createGatherings" ? (
+        <div className="gatheringCard">
+          <div className="gatheringCardHeader">
+            <img src={image} alt="gathering image" />
+            <div className="gatheringCardHeaderInfo">
+              <div className="gatheringCardHeaderInfoText">
+                <span>{date}</span>
+                <span>
+                  1
+                  <img src={attendingImg} alt="Attending img" />
+                  <br />
+                  attending
+                </span>
+              </div>
+              <div className="gatheringCardHeaderInfoPips">
+                <div className="pip" />
+              </div>
+            </div>
+          </div>
+          <div className="gatheringCardContent">
+            <h2 className="gatheringTitle">{title}</h2>
+            <p className="gatheringDescription">{description}</p>
+            <div className="gatheringLocation">
+              <span className="gatheringAt">Location:</span>
+              <span className="gatheringPlace">{place}</span>
+            </div>
+            <div className="gatheringTimes">
+              <span className="gatheringStartTime">{startTime}</span>
+              <span className="gatheringTimeSeparator"> from </span>
+              <span className="gatheringEndTime">{endTime}</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            ref={descriptionareaRef}
-            placeholder="Whats the gathering for/about?"
-            defaultValue={post?.description}
-            required
-          />
-        </div>
-        <button type="submit" disabled={fetcher.state === "submitting"}>
-          {fetcher.state !== "idle" ? "Saving..." : "Save"}
-        </button>
-      </fieldset>
-    </fetcher.Form>
+      ) : null}
+    </>
   );
 }
