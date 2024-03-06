@@ -309,8 +309,8 @@ textarea {
   margin: 10px 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 425px;
+  width: 380px;
+  height: 400px;
 }
 
 /* styling of the gatheringCardHeader */
@@ -328,8 +328,8 @@ textarea {
 
 .gatheringCardHeader img {
   height: auto;
-  width: 400px;
-  max-height: 300px;
+  width: 380px;
+  max-height: 210px;
   margin: 0;
   padding: 0;
 }
