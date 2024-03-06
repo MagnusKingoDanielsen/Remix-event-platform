@@ -6,8 +6,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  redirect,
 } from "@remix-run/react";
 import styles from "./main.css";
+import Nav from "../app/components/nav.jsx";
+import { getSession, destroySession } from "../app/services/session.server.jsx";
 
 export const links = () => [
   {
@@ -15,6 +18,11 @@ export const links = () => [
     href: styles,
   },
 ];
+export async function loader({ request }) {
+  const session = await getSession(request.headers.get("cookie"));
+
+  return { session: session.data };
+}
 
 export function meta() {
   return [{ title: "Work Journal" }];
@@ -30,6 +38,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <Nav />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -37,4 +46,14 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export async function action({ request }) {
+  const session = await getSession(request.headers.get("cookie"));
+
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+  });
 }

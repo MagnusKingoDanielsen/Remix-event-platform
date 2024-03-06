@@ -2,7 +2,7 @@ import { mongoose } from "mongoose";
 
 const { Schema } = mongoose;
 
-const eventSchema = new Schema(
+const gatheringsSchema = new Schema(
   {
     date: {
       type: Date,
@@ -12,7 +12,7 @@ const eventSchema = new Schema(
       type: String,
       required: true,
     },
-    descripton: {
+    description: {
       type: String,
       required: true,
     },
@@ -31,6 +31,14 @@ const eventSchema = new Schema(
     endTime: {
       type: String,
       required: true,
+    },
+    createdBy: {
+      type: String,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      required: false,
     },
   },
   // Automatically add `createdAt` and `updatedAt` timestamps:
@@ -73,8 +81,8 @@ const userSchema = new Schema(
 // in the database (which will be created automatically).
 export const models = [
   {
-    name: "Events",
-    schema: eventSchema,
+    name: "Gatherings",
+    schema: gatheringsSchema,
     collection: "events",
   },
   {
