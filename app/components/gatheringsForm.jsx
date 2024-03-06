@@ -17,6 +17,13 @@ export default function gatheringsForm({ post = {} }) {
 
   const fetcher = useFetcher();
   const descriptionareaRef = useRef(null);
+  const placeRef = useRef(null);
+  const titleRef = useRef(null);
+  const dateRef = useRef(null);
+  const startTimeRef = useRef(null);
+  const endTimeRef = useRef(null);
+  const imageRef = useRef(null);
+
   const isIdle = fetcher.state === "idle";
   const isInit = isIdle && fetcher.data == null;
   const dateValue = post.date
@@ -42,6 +49,19 @@ export default function gatheringsForm({ post = {} }) {
   useEffect(() => {
     if (!isInit && isIdle && descriptionareaRef.current) {
       descriptionareaRef.current.value = "";
+      placeRef.current.value = "";
+      titleRef.current.value = "";
+      dateRef.current.value = "";
+      startTimeRef.current.value = "";
+      endTimeRef.current.value = "";
+      imageRef.current.value = "";
+      setImage(placeholderImg);
+      setDate("00 000 0000");
+      setTitle("Placeholder title");
+      setDescription("Placeholder description");
+      setPlace("Placeholder place");
+      setStartTime("00:00");
+      setEndTime("00:00");
       descriptionareaRef.current.focus();
     }
   }, [isInit, isIdle]);
@@ -66,6 +86,7 @@ export default function gatheringsForm({ post = {} }) {
               type="text"
               id="title"
               name="title"
+              ref={titleRef}
               placeholder="Gathering title"
               required
               defaultValue={post?.title}
@@ -80,6 +101,7 @@ export default function gatheringsForm({ post = {} }) {
                 type="date"
                 id="date"
                 name="date"
+                ref={dateRef}
                 required
                 defaultValue={dateValue}
                 onChange={(e) =>
@@ -100,6 +122,7 @@ export default function gatheringsForm({ post = {} }) {
                 type="time"
                 id="startTime"
                 name="startTime"
+                ref={startTimeRef}
                 required
                 defaultValue={post?.startTime}
                 onChange={(e) => setStartTime(e.target.value)}
@@ -111,6 +134,7 @@ export default function gatheringsForm({ post = {} }) {
                 type="time"
                 id="endTime"
                 name="endTime"
+                ref={endTimeRef}
                 required
                 defaultValue={post?.endTime}
                 onChange={(e) => setEndTime(e.target.value)}
@@ -123,6 +147,7 @@ export default function gatheringsForm({ post = {} }) {
               type="text"
               id="place"
               name="place"
+              ref={placeRef}
               placeholder="Where is the event taking place?"
               required
               defaultValue={post?.place}
@@ -131,7 +156,12 @@ export default function gatheringsForm({ post = {} }) {
           </div>
           <div>
             <label htmlFor="file_input">Add an image</label>
-            <input name="image" type="file" onChange={handleImageChange} />
+            <input
+              name="image"
+              type="file"
+              ref={imageRef}
+              onChange={handleImageChange}
+            />
             {image && (
               <img
                 src={image}

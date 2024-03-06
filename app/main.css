@@ -180,8 +180,8 @@ nav a {
 .createGathering {
   margin-top: 80px;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-evenly;
+  flex-direction: row;
   align-items: center;
   min-height: calc(100vh - 80px);
   background-color: var(--text-color);
