@@ -1,4 +1,5 @@
 import { useLoaderData, Link, Form, useLocation } from "@remix-run/react";
+import logo from "../img/GatheringsLogo.png";
 
 export default function Nav() {
   const { session } = useLoaderData();
@@ -9,8 +10,7 @@ export default function Nav() {
         <nav>
           <div className="navLinks">
             <div className="logo">
-              {/* <img src="/logo.png" alt="logo" /> */}
-              <p>placeholder</p>
+              <img src={logo} alt="logo" />
             </div>
             <div className="mainLinks">
               <a href="/gatherings">Gatherings</a>

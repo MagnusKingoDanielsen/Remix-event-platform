@@ -1,6 +1,6 @@
 :root {
-  --background-color: rgb(15 23 42);
-  --text-color: rgb(248 250 252);
+  --background-color: #0f172a;
+  --text-color: #f8fafc;
   --grey-text-color: rgb(150 150 150);
   font-family:
     system-ui,
@@ -14,6 +14,13 @@
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+:root::-webkit-scrollbar {
+  display: none;
 }
 body {
   margin: 0;
@@ -148,8 +155,14 @@ nav {
 nav a {
   text-decoration: none;
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 16px;
   transition: 0.3s;
+  text-align: center;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
 }
 
 .navLinks {
@@ -158,7 +171,7 @@ nav a {
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  padding: 10px 5%;
+  padding: 10px 2.5%;
 }
 
 .mainLinks {
@@ -166,14 +179,14 @@ nav a {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  width: 50%;
+  width: 65%;
 }
 
 .logoutBTN {
-  background-color: var(--background-color);
+  background-color: transparent;
   border: none;
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 16px;
 }
 
 /* styling of gatheringsForm */
@@ -182,6 +195,7 @@ nav a {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   min-height: calc(100vh - 80px);
   background-color: var(--text-color);
@@ -192,13 +206,14 @@ nav a {
   align-items: center;
   padding: 20px;
   border-radius: 10px;
+  max-width: 340px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: var(--text-color);
 }
 
 .fieldset {
   border: none;
-  width: 400px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,7 +226,7 @@ nav a {
 
 .fieldset input,
 textarea {
-  width: 380px;
+  width: 320px;
   padding: 10px;
   margin: 10px 0;
   border: none;
@@ -233,7 +248,7 @@ textarea {
   width: 100%;
 }
 .dateAndTime input {
-  width: 100px;
+  width: 80px;
   margin: 10px 0;
 }
 .dateAndTime div {
@@ -245,12 +260,12 @@ textarea {
 .fieldset img {
   width: fit-content;
   height: auto;
-  max-width: 400px;
-  max-height: 300px;
+  max-width: 340px;
+  max-height: 2500px;
 }
 
 .fieldset button {
-  width: 400px;
+  width: 340px;
   padding: 10px;
   margin: 10px 0;
   border: none;
@@ -281,7 +296,7 @@ textarea {
 
 .displayPage {
   margin-top: 80px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -297,6 +312,7 @@ textarea {
   flex-wrap: wrap;
   gap: 20px;
   width: 100%;
+  max-width: 1200px;
 }
 
 /* styling of the individual cards */
@@ -307,8 +323,8 @@ textarea {
   margin: 10px 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 425px;
+  width: 380px;
+  height: 400px;
 }
 
 /* styling of the gatheringCardHeader */
@@ -326,8 +342,8 @@ textarea {
 
 .gatheringCardHeader img {
   height: auto;
-  width: 400px;
-  max-height: 300px;
+  width: 380px;
+  max-height: 210px;
   margin: 0;
   padding: 0;
 }
@@ -339,7 +355,7 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
+  width: 99px;
   margin: 0;
   border-radius: 10px 0 0 0;
   color: var(--text-color);
@@ -354,9 +370,9 @@ textarea {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 80px;
+  width: 79px;
   gap: 20px;
-  min-height: 125px;
+  height: 90px;
   margin: 0;
   padding: 20px 10px;
   background-color: var(--background-color);
@@ -388,6 +404,7 @@ textarea {
   width: 70px;
   height: 70px;
   rotate: 45deg;
+  border-radius: 0 0 5px 0;
   background-color: var(--background-color);
 }
 
