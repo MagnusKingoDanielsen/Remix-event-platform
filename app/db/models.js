@@ -18,7 +18,7 @@ const gatheringsSchema = new Schema(
     },
     attending: {
       type: Array,
-      required: false,
+      required: true,
     },
     place: {
       type: String,
@@ -38,7 +38,7 @@ const gatheringsSchema = new Schema(
     },
     imageUrl: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   // Automatically add `createdAt` and `updatedAt` timestamps:

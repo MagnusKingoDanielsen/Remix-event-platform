@@ -354,6 +354,7 @@ textarea {
   display: flex;
   flex-direction: column;
   text-align: center;
+  width: 80px;
   gap: 20px;
   min-height: 125px;
   margin: 0;

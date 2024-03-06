@@ -160,6 +160,7 @@ export default function gatheringsForm({ post = {} }) {
               name="image"
               type="file"
               ref={imageRef}
+              required
               onChange={handleImageChange}
             />
             {image && (

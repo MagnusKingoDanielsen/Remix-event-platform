@@ -57,7 +57,7 @@ export const action = async ({ request }) => {
   }
   const imageUrl = image ? await uploadImage(image) : "";
 
-  return await mongoose.models.Gatherings.create({
+  await mongoose.models.Gatherings.create({
     date,
     title,
     description,
@@ -68,4 +68,5 @@ export const action = async ({ request }) => {
     createdBy,
     imageUrl,
   });
+  return redirect("/myGatherings");
 };
