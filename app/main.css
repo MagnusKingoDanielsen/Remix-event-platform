@@ -180,10 +180,10 @@ nav a {
 .createGathering {
   margin-top: 80px;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-evenly;
+  flex-direction: row;
   align-items: center;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   background-color: var(--text-color);
 }
 .gatheringsForm {
@@ -354,6 +354,7 @@ textarea {
   display: flex;
   flex-direction: column;
   text-align: center;
+  width: 80px;
   gap: 20px;
   min-height: 125px;
   margin: 0;
