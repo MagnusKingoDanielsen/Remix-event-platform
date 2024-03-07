@@ -326,6 +326,10 @@ textarea {
   width: 380px;
   height: 400px;
 }
+.gatheringCard a {
+  text-decoration: none;
+  color: var(--background-color);
+}
 
 /* styling of the gatheringCardHeader */
 .gatheringCardHeader {
