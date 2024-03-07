@@ -39,7 +39,7 @@ export default function GatheringDisplay({}) {
         </div>
         <div className="gatheringCardContent">
           <h2 className="gatheringTitle">{gathering.title}</h2>
-          <p className="gatheringDescription">{gathering.description}</p>
+          <p className="gatheringDescription2">{gathering.description}</p>
           <div className="gatheringLocation">
             <span className="gatheringAt">Location:</span>
             <span className="gatheringPlace">{gathering.place}</span>
