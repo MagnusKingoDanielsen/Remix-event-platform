@@ -13,7 +13,7 @@ export default function Nav() {
               <img src={logo} alt="logo" />
             </div>
             <div className="mainLinks">
-              <a href="/gatherings">Gatherings</a>
+              <a href="/">Gatherings</a>
               <a href="/createGatherings">Create a gathering</a>
               <a href="/myGatherings">My gatherings</a>
             </div>

@@ -7,13 +7,30 @@ export default function gatheringsForm({ post = {} }) {
   const [image, setImage] = useState(
     post?.imageUrl ? post?.imageUrl : placeholderImg,
   );
-
-  const [title, setTitle] = useState("Placeholder title");
-  const [date, setDate] = useState("00 000 0000");
-  const [description, setDescription] = useState("Placeholder description");
-  const [place, setPlace] = useState("Placeholder place");
-  const [startTime, setStartTime] = useState("00:00");
-  const [endTime, setEndTime] = useState("00:00");
+  const [title, setTitle] = useState(
+    post?.title ? post.title : "Placeholder title",
+  );
+  const [date, setDate] = useState(
+    post?.date
+      ? new Date(post?.date).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        })
+      : "00 000 0000",
+  );
+  const [description, setDescription] = useState(
+    post?.description ? post?.description : "Placeholder description",
+  );
+  const [place, setPlace] = useState(
+    post?.place ? post?.place : "Placeholder place",
+  );
+  const [startTime, setStartTime] = useState(
+    post?.startTime ? post?.startTime : "00:00",
+  );
+  const [endTime, setEndTime] = useState(
+    post?.endTime ? post?.endTime : "00:00",
+  );
 
   const fetcher = useFetcher();
   const descriptionareaRef = useRef(null);
@@ -160,7 +177,7 @@ export default function gatheringsForm({ post = {} }) {
               name="image"
               type="file"
               ref={imageRef}
-              required
+              {...(post.imageUrl ? { required: false } : { required: true })}
               onChange={handleImageChange}
             />
             {image && (
@@ -187,40 +204,39 @@ export default function gatheringsForm({ post = {} }) {
           </button>
         </fieldset>
       </fetcher.Form>
-      {page === "/createGatherings" ? (
-        <div className="gatheringCard">
-          <div className="gatheringCardHeader">
-            <img src={image} alt="gathering image" />
-            <div className="gatheringCardHeaderInfo">
-              <div className="gatheringCardHeaderInfoText">
-                <span>{date}</span>
-                <span>
-                  1
-                  <img src={attendingImg} alt="Attending img" />
-                  <br />
-                  attending
-                </span>
-              </div>
-              <div className="gatheringCardHeaderInfoPips">
-                <div className="pip" />
-              </div>
+
+      <div className="gatheringCard">
+        <div className="gatheringCardHeader">
+          <img src={image} alt="gathering image" />
+          <div className="gatheringCardHeaderInfo">
+            <div className="gatheringCardHeaderInfoText">
+              <span>{date}</span>
+              <span>
+                1
+                <img src={attendingImg} alt="Attending img" />
+                <br />
+                attending
+              </span>
             </div>
-          </div>
-          <div className="gatheringCardContent">
-            <h2 className="gatheringTitle">{title}</h2>
-            <p className="gatheringDescription">{description}</p>
-            <div className="gatheringLocation">
-              <span className="gatheringAt">Location:</span>
-              <span className="gatheringPlace">{place}</span>
-            </div>
-            <div className="gatheringTimes">
-              <span className="gatheringStartTime">{startTime}</span>
-              <span className="gatheringTimeSeparator"> from </span>
-              <span className="gatheringEndTime">{endTime}</span>
+            <div className="gatheringCardHeaderInfoPips">
+              <div className="pip" />
             </div>
           </div>
         </div>
-      ) : null}
+        <div className="gatheringCardContent">
+          <h2 className="gatheringTitle">{title}</h2>
+          <p className="gatheringDescription">{description}</p>
+          <div className="gatheringLocation">
+            <span className="gatheringAt">Location:</span>
+            <span className="gatheringPlace">{place}</span>
+          </div>
+          <div className="gatheringTimes">
+            <span className="gatheringStartTime">{startTime}</span>
+            <span className="gatheringTimeSeparator"> from </span>
+            <span className="gatheringEndTime">{endTime}</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
