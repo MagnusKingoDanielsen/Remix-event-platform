@@ -2,7 +2,7 @@ import { redirect } from "@remix-run/react";
 import mongoose from "mongoose";
 import { getSession } from "../services/session.server.jsx";
 import GatheringsForm from "../components/gatheringsForm.jsx";
-import { uploadImage } from "../upload-handler.server.js";
+import { uploadImage } from "../image-handler.server.js";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
