@@ -73,7 +73,7 @@ export const action = async ({ request, params }) => {
     throw new Response("Not authenticated", { status: 401 });
   }
   const gathering = await mongoose.models.Gatherings.findById(params.id);
-  if (!session.data.username === gathering.createdBy) {
+  if (session.data.username !== gathering.createdBy) {
     throw new Response("Not authorized", { status: 403 });
   }
   if (_action === "delete") {
