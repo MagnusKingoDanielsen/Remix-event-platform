@@ -2,6 +2,7 @@
   --background-color: #0f172a;
   --text-color: #f8fafc;
   --grey-text-color: rgb(150 150 150);
+  --dark-red-color: #b91c1c;
   font-family:
     system-ui,
     -apple-system,
@@ -190,16 +191,43 @@ nav a {
 }
 
 /* styling of gatheringsForm */
-.createGathering {
+.createGathering,
+.editPage {
   margin-top: 80px;
   display: flex;
-  justify-content: space-evenly;
   flex-direction: row;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
   min-height: calc(100vh - 80px);
   background-color: var(--text-color);
 }
+.editPage {
+  flex-direction: column;
+}
+.editGathering,
+.deleteSection {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+}
+.deleteBTN {
+  background-color: var(--dark-red-color);
+  color: var(--text-color);
+  padding: 10px;
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 340px;
+}
+.spacer {
+  display: block;
+  width: 380px;
+}
+
 .gatheringsForm {
   display: flex;
   flex-direction: column;

@@ -35,13 +35,23 @@ export default function GatheringEdit() {
     }
   }
   return (
-    <div className="createGathering">
-      <GatheringsForm post={gathering} />
-      <Form method="post" onSubmit={handleSubmit}>
-        <button name="_action" value="delete" type="submit">
-          Delete
-        </button>
-      </Form>
+    <div className="editPage">
+      <div className="editGathering">
+        <GatheringsForm post={gathering} />
+      </div>
+      <div className="deleteSection">
+        <Form method="post" onSubmit={handleSubmit}>
+          <button
+            name="_action"
+            value="delete"
+            type="submit"
+            className="deleteBTN"
+          >
+            Delete gathering
+          </button>
+        </Form>
+        <div className="spacer"></div>
+      </div>
     </div>
   );
 }
