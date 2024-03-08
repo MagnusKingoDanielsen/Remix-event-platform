@@ -1,8 +1,8 @@
-import { redirect, useLoaderData } from "@remix-run/react";
+import { redirect, useLoaderData, Form } from "@remix-run/react";
 import mongoose from "mongoose";
 import { getSession } from "../services/session.server.jsx";
 import GatheringsForm from "../components/gatheringsForm.jsx";
-import { uploadImage } from "../upload-handler.server.js";
+import { deleteImage, uploadImage } from "../image-handler.server.js";
 
 export async function loader({ request, params }) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -18,30 +18,60 @@ export async function loader({ request, params }) {
   if (!gathering) {
     throw new Response("Not found", { status: 404 });
   }
+  if (session.data.username !== gathering.createdBy) {
+    throw new Response("Not authorized", { status: 403 });
+  }
 
   return { gathering };
 }
 
 export default function GatheringEdit() {
   const { gathering } = useLoaderData();
+  function handleSubmit(e) {
+    if (confirm("Are you sure?")) {
+    } else {
+      // User clicked "Cancel"
+      e.preventDefault();
+    }
+  }
   return (
     <div className="createGathering">
       <GatheringsForm post={gathering} />
+      <Form method="post" onSubmit={handleSubmit}>
+        <button name="_action" value="delete" type="submit">
+          Delete
+        </button>
+      </Form>
     </div>
   );
 }
 
 export const action = async ({ request, params }) => {
-  // const { gathering } = useLoaderData();
-
   const formData = await request.formData();
-  const { date, title, description, place, startTime, endTime, image } =
-    Object.fromEntries(formData);
+  const {
+    _action,
+    date,
+    title,
+    description,
+    place,
+    startTime,
+    endTime,
+    image,
+  } = Object.fromEntries(formData);
   const session = await getSession(request.headers.get("cookie"));
   if (!session.data.user) {
     throw new Response("Not authenticated", { status: 401 });
   }
-  if (
+  const gathering = await mongoose.models.Gatherings.findById(params.id);
+  if (!session.data.username === gathering.createdBy) {
+    throw new Response("Not authorized", { status: 403 });
+  }
+  if (_action === "delete") {
+    await deleteImage(gathering.imageUrl);
+    await mongoose.models.Gatherings.findByIdAndDelete(params.id);
+
+    return redirect("/myGatherings");
+  } else if (
     typeof date !== "string" ||
     typeof title !== "string" ||
     typeof description !== "string" ||

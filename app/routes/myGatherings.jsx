@@ -1,4 +1,4 @@
-import { redirect, useLoaderData, Link } from "@remix-run/react";
+import { redirect, useLoaderData, Link, Form } from "@remix-run/react";
 import { getSession } from "../services/session.server.jsx";
 import mongoose from "mongoose";
 import attendingImg from "../img/attending.png";
@@ -29,6 +29,7 @@ export async function loader({ request }) {
 export default function MyGatherings() {
   const { gatherings } = useLoaderData();
   console.log(gatherings);
+
   return (
     <div className="displayPage">
       <h1>Gatherings</h1>
