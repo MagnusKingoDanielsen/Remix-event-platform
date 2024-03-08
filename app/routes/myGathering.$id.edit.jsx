@@ -113,6 +113,7 @@ export const action = async ({ request, params }) => {
       endTime,
       imageUrl,
     });
+    await deleteImage(gathering.imageUrl);
   }
   return redirect(`/gathering/${params.id}`);
 };
