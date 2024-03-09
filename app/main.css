@@ -504,7 +504,8 @@ textarea {
   margin: 0 10px;
 }
 
-.gatheringAttending {
+.gatheringAttending,
+.gatheringAttendingBig {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -513,7 +514,11 @@ textarea {
   width: 100%;
   height: 80px;
 }
-.gatheringAttending ul {
+.gatheringAttendingBig {
+  height: fit-content;
+}
+.gatheringAttending ul,
+.gatheringAttendingBig ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -523,7 +528,8 @@ textarea {
   padding: 10px 0 0 0;
   gap: 10px;
 }
-.gatheringAttending ul li:last-child span {
+.gatheringAttending ul li:last-child span,
+.gatheringAttendingBig ul li:last-child span {
   display: none;
 }
 
