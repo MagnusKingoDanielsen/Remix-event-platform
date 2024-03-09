@@ -1,9 +1,10 @@
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+
 import attendingImg from "../img/attending.png";
 import placeholderImg from "../img/placeholder.jpg";
 
-export default function gatheringsForm({ post = {} }) {
+export default function gatheringsForm({ post = {}, username = {} }) {
   const [image, setImage] = useState(
     post?.imageUrl ? post?.imageUrl : placeholderImg,
   );
@@ -31,6 +32,8 @@ export default function gatheringsForm({ post = {} }) {
   const [endTime, setEndTime] = useState(
     post?.endTime ? post?.endTime : "00:00",
   );
+  const attending = post?.attending ? post?.attending : [];
+  const createdBy = username;
 
   const fetcher = useFetcher();
   const descriptionareaRef = useRef(null);
@@ -212,7 +215,7 @@ export default function gatheringsForm({ post = {} }) {
             <div className="gatheringCardHeaderInfoText">
               <span>{date}</span>
               <span>
-                1
+                {attending.length}
                 <img src={attendingImg} alt="Attending img" />
                 <br />
                 attending
@@ -234,6 +237,23 @@ export default function gatheringsForm({ post = {} }) {
             <span className="gatheringStartTime">{startTime}</span>
             <span className="gatheringTimeSeparator"> from </span>
             <span className="gatheringEndTime">{endTime}</span>
+          </div>
+          <div className="gatheringAttending">
+            <span>Attending:</span>
+            <div className="AttendingSpacing">
+              <ul>
+                {attending.slice(0, 3).map((attending) => (
+                  <li key={attending}>
+                    {attending == createdBy ? "©" : ""}
+                    {attending}
+                    <span> | </span>
+                  </li>
+                ))}
+              </ul>
+              {attending.length > 3 ? (
+                <p className="andMore">+ {attending.length - 3} more</p>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

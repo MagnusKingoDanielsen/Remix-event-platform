@@ -368,7 +368,7 @@ textarea {
   justify-content: space-between;
   width: 100%;
   border-radius: 10px 10px 0 0;
-  max-height: 250px;
+  min-height: 210px;
   overflow: hidden;
 }
 
@@ -504,6 +504,43 @@ textarea {
   margin: 0 10px;
 }
 
+.gatheringAttending {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+}
+.AttendingSpacing {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: space-between;
+}
+
+.gatheringAttending ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+}
+.gatheringAttending ul li:nth-last-child(1) span {
+  display: none;
+}
+.gatheringAttending p {
+  display: flex;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--background-color);
+}
+
 /* styling of gathering page */
 .gatheringPage {
   margin-top: 80px;
@@ -603,18 +640,6 @@ textarea {
   border-radius: 0 0 5px 0;
   background-color: var(--background-color);
 }
-.gatheringContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 20px;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: var(--text-color);
-  color: var(--background-color);
-  width: calc(100% - 40px);
-}
 
 .gatheringTitle {
   font-size: 20px;
@@ -663,4 +688,18 @@ textarea {
   display: flex;
   align-items: center;
   margin: 0 10px;
+}
+
+.AttendBTN,
+.editButton {
+  width: 340px;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.3s;
 }
