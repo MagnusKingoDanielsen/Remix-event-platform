@@ -1,9 +1,10 @@
 import { useFetcher, useLocation } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+
 import attendingImg from "../img/attending.png";
 import placeholderImg from "../img/placeholder.jpg";
 
-export default function gatheringsForm({ post = {} }) {
+export default function gatheringsForm({ post = {}, username = {} }) {
   const [image, setImage] = useState(
     post?.imageUrl ? post?.imageUrl : placeholderImg,
   );
@@ -31,6 +32,8 @@ export default function gatheringsForm({ post = {} }) {
   const [endTime, setEndTime] = useState(
     post?.endTime ? post?.endTime : "00:00",
   );
+  const attending = post?.attending ? post?.attending : [];
+  const createdBy = username;
 
   const fetcher = useFetcher();
   const descriptionareaRef = useRef(null);
@@ -234,6 +237,24 @@ export default function gatheringsForm({ post = {} }) {
             <span className="gatheringStartTime">{startTime}</span>
             <span className="gatheringTimeSeparator"> from </span>
             <span className="gatheringEndTime">{endTime}</span>
+          </div>
+          <div className="gatheringAttending">
+            <span>Attending:</span>
+            <ul>
+              {attending.length === 0 ? (
+                "©" + username
+              ) : (
+                <>
+                  {attending.map((attending) => (
+                    <li key={attending}>
+                      {attending == username ? " ©" : ""}
+                      {attending}
+                      <span> | </span>
+                    </li>
+                  ))}
+                </>
+              )}
+            </ul>
           </div>
         </div>
       </div>

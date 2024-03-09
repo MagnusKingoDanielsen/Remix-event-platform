@@ -22,11 +22,12 @@ export async function loader({ request, params }) {
     throw new Response("Not authorized", { status: 403 });
   }
 
-  return { gathering };
+  return { gathering: gathering, session: session.data };
 }
 
 export default function GatheringEdit() {
-  const { gathering } = useLoaderData();
+  const { gathering, session } = useLoaderData();
+  const user = session.username;
   function handleSubmit(e) {
     if (confirm("Are you sure?")) {
     } else {
@@ -37,7 +38,7 @@ export default function GatheringEdit() {
   return (
     <div className="editPage">
       <div className="editGathering">
-        <GatheringsForm post={gathering} />
+        <GatheringsForm post={gathering} username={user} />
       </div>
       <div className="deleteSection">
         <Form method="post" onSubmit={handleSubmit}>

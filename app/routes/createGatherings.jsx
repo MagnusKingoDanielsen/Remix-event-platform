@@ -1,4 +1,4 @@
-import { redirect } from "@remix-run/react";
+import { redirect, useLoaderData } from "@remix-run/react";
 import mongoose from "mongoose";
 import { getSession } from "../services/session.server.jsx";
 import GatheringsForm from "../components/gatheringsForm.jsx";
@@ -14,9 +14,12 @@ export async function loader({ request }) {
 }
 
 export default function Projekter() {
+  const { session } = useLoaderData();
+  const user = session.username;
+  console.log(user);
   return (
     <div className="createGathering">
-      <GatheringsForm />
+      <GatheringsForm username={user} />
     </div>
   );
 }

@@ -68,6 +68,18 @@ export default function MyGatherings() {
                   <span className="gatheringTimeSeparator"> from </span>
                   <span className="gatheringEndTime">{gathering.endTime}</span>
                 </div>
+                <div className="gatheringAttending">
+                  <span>Attending:</span>
+                  <ul>
+                    {gathering.attending.map((attending) => (
+                      <li key={attending}>
+                        {attending == gathering.createdBy ? " ©" : ""}
+                        {attending}
+                        <span> | </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <Link to={`/myGathering/${gathering._id}/edit`}>
                   <button className="editButton">Edit</button>
                 </Link>
