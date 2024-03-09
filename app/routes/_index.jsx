@@ -1,18 +1,10 @@
-import { redirect, useLoaderData, Link } from "@remix-run/react";
-import { getSession } from "../services/session.server.jsx";
+import { useLoaderData, Link } from "@remix-run/react";
 import mongoose from "mongoose";
 import attendingImg from "../img/attending.png";
 
-export async function loader({ request }) {
-  const session = await getSession(request.headers.get("Cookie"));
+export async function loader({}) {
   const gatherings = await mongoose.models.Gatherings.find().lean().exec();
-  if (!session.data.user) {
-    return redirect("/login");
-  }
-  console.log(gatherings);
-
   return {
-    session: session.data,
     gatherings: gatherings.map((gathering) => ({
       ...gathering,
       date: new Date(gathering.date).toLocaleDateString("en-GB", {
