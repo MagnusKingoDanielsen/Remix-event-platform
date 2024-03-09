@@ -215,7 +215,7 @@ export default function gatheringsForm({ post = {}, username = {} }) {
             <div className="gatheringCardHeaderInfoText">
               <span>{date}</span>
               <span>
-                1
+                {attending.length}
                 <img src={attendingImg} alt="Attending img" />
                 <br />
                 attending
@@ -240,21 +240,20 @@ export default function gatheringsForm({ post = {}, username = {} }) {
           </div>
           <div className="gatheringAttending">
             <span>Attending:</span>
-            <ul>
-              {attending.length === 0 ? (
-                "©" + username
-              ) : (
-                <>
-                  {attending.map((attending) => (
-                    <li key={attending}>
-                      {attending == username ? " ©" : ""}
-                      {attending}
-                      <span> | </span>
-                    </li>
-                  ))}
-                </>
-              )}
-            </ul>
+            <div className="AttendingSpacing">
+              <ul>
+                {attending.slice(0, 3).map((attending) => (
+                  <li key={attending}>
+                    {attending == createdBy ? "©" : ""}
+                    {attending}
+                    <span> | </span>
+                  </li>
+                ))}
+              </ul>
+              {attending.length > 3 ? (
+                <p className="andMore">+ {attending.length - 3} more</p>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

@@ -70,15 +70,22 @@ export default function MyGatherings() {
                 </div>
                 <div className="gatheringAttending">
                   <span>Attending:</span>
-                  <ul>
-                    {gathering.attending.map((attending) => (
-                      <li key={attending}>
-                        {attending == gathering.createdBy ? " ©" : ""}
-                        {attending}
-                        <span> | </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="AttendingSpacing">
+                    <ul>
+                      {gathering.attending.slice(0, 3).map((attending) => (
+                        <li key={attending}>
+                          {attending == gathering.createdBy ? "©" : ""}
+                          {attending}
+                          <span> | </span>
+                        </li>
+                      ))}
+                    </ul>
+                    {gathering.attending.length > 3 ? (
+                      <p className="andMore">
+                        + {gathering.attending.length - 3} more
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
                 <Link to={`/myGathering/${gathering._id}/edit`}>
                   <button className="editButton">Edit</button>
