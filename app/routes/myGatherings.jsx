@@ -40,7 +40,8 @@ export async function loader({ request }) {
 }
 
 export default function MyGatherings() {
-  const { hostedGatherings, attendingGatherings } = useLoaderData();
+  const { hostedGatherings, attendingGatherings, session } = useLoaderData();
+  const user = session.username;
 
   return (
     <div className="displayPage">
@@ -164,14 +165,40 @@ export default function MyGatherings() {
                     ) : null}
                   </div>
                 </div>
-                <Link to={`/myGathering/${gathering._id}/edit`}>
-                  <button className="editButton">Edit</button>
-                </Link>
               </div>
             </Link>
+            <Form method="post">
+              <button
+                type="submit"
+                className="AttendBTN"
+                name="_action"
+                value={gathering._id}
+              >
+                {gathering.attending.includes(user) == false
+                  ? "Attend"
+                  : "Leave"}
+              </button>
+            </Form>
           </div>
         ))}
       </div>
     </div>
   );
 }
+export const action = async ({ request }) => {
+  const session = await getSession(request.headers.get("cookie"));
+  if (!session.data.user) {
+    throw new Response("Not authenticated", { status: 401 });
+  }
+  const { _action } = Object.fromEntries(await request.formData());
+
+  const gathering = await mongoose.models.Gatherings.findById(_action);
+  if (gathering.attending.includes(session.data.username)) {
+    //remove user from attending
+    gathering.attending = gathering.attending.filter(
+      (attending) => attending !== session.data.username,
+    );
+    await gathering.save();
+    return redirect(`/myGatherings`);
+  }
+};
