@@ -343,7 +343,9 @@ textarea {
   margin: 20px 0;
 }
 
-.displayGatherings {
+.displayGatherings,
+.displayHosted,
+.displayAttending {
   display: flex;
   flex-direction: row;
   justify-content: center;
