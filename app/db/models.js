@@ -83,7 +83,7 @@ export const models = [
   {
     name: "Gatherings",
     schema: gatheringsSchema,
-    collection: "events",
+    collection: "gatherings",
   },
   {
     name: "Users",
