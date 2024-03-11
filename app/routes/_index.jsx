@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from "@remix-run/react";
 import mongoose from "mongoose";
 import attendingImg from "../img/attending.png";
+import { useState } from "react";
 
 export async function loader({}) {
   const gatherings = await mongoose.models.Gatherings.find().lean().exec();
@@ -17,11 +18,28 @@ export async function loader({}) {
 }
 export default function Gatherings() {
   const { gatherings } = useLoaderData();
+  const [search, setSearch] = useState("");
+
+  const filteredGatherings = gatherings.filter((gathering) => {
+    return (
+      gathering.title.toLowerCase().includes(search.toLowerCase()) ||
+      gathering.date.toLowerCase().includes(search.toLowerCase()) ||
+      gathering.createdBy.toLowerCase().includes(search.toLowerCase()) ||
+      gathering.description.toLowerCase().includes(search.toLowerCase())
+    );
+  });
   return (
     <div className="displayPage">
       <h1>Gatherings</h1>
+      <input
+        type="text"
+        placeholder="Search by name or date"
+        className="searchBar"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className="displayGatherings">
-        {gatherings.map((gathering) => (
+        {filteredGatherings.map((gathering) => (
           <div key={gathering._id} className="gatheringCard">
             <Link to={`/gathering/${gathering._id}`}>
               <div className="gatheringCardHeader">

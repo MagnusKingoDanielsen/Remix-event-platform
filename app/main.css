@@ -100,7 +100,8 @@ h6 {
 .loginContainer input,
 .loginContainer button,
 .signupContainer input,
-.signupContainer button {
+.signupContainer button,
+.searchBar {
   width: 330px;
   padding: 10px;
   margin: 10px 0;
@@ -331,6 +332,15 @@ textarea {
   padding: 20px;
   background-color: var(--text-color);
   color: var(--background-color);
+}
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 980px;
+  margin: 20px 0;
 }
 
 .displayGatherings {
